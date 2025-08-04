@@ -1648,6 +1648,12 @@ mp_obj_t ndarray_binary_op(mp_binary_op_t _op, mp_obj_t lobj, mp_obj_t robj) {
             return ndarray_inplace_ams(lhs, rhs, rstrides, op);
             break;
         #endif
+        #if NDARRAY_HAS_INPLACE_MODULO
+        case MP_BINARY_OP_INPLACE_MODULO:
+            COMPLEX_DTYPE_NOT_IMPLEMENTED(lhs->dtype);
+            return ndarray_inplace_modulo(lhs, rhs, rstrides);
+            break;
+        #endif
         #if NDARRAY_HAS_INPLACE_MULTIPLY
         case MP_BINARY_OP_INPLACE_MULTIPLY:
             COMPLEX_DTYPE_NOT_IMPLEMENTED(lhs->dtype);
@@ -1701,6 +1707,12 @@ mp_obj_t ndarray_binary_op(mp_binary_op_t _op, mp_obj_t lobj, mp_obj_t robj) {
         #if NDARRAY_HAS_BINARY_OP_ADD
         case MP_BINARY_OP_ADD:
             return ndarray_binary_add(lhs, rhs, ndim, shape, lstrides, rstrides);
+            break;
+        #endif
+        #if NDARRAY_HAS_BINARY_OP_MODULO
+        case MP_BINARY_OP_MODULO:
+            COMPLEX_DTYPE_NOT_IMPLEMENTED(lhs->dtype);
+            return ndarray_binary_modulo(lhs, rhs, ndim, shape, lstrides, rstrides);
             break;
         #endif
         #if NDARRAY_HAS_BINARY_OP_MULTIPLY
